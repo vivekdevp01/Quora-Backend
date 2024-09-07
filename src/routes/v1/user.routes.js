@@ -4,6 +4,8 @@ const userRouter=express.Router();
 
 userRouter.get('/ping',UserController.ping);
 
+userRouter.post('/add',UserController.add);
+
 
 
 module.exports=userRouter;
