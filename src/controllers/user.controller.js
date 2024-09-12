@@ -1,21 +1,53 @@
 const BadRequest = require("../errors/badrequest");
 const NotImplemented = require("../errors/notimplemented");
+const {UserRepository}=require('../repositories');
+const {UserService}=require('../services');
+const {StatusCodes}=require('http-status-codes');
 
-function ping(req,res){
-    res.json({message:"hey"})
+const userService=new UserService(new UserRepository());
+
+
+async function createUser(req,res,next){
+    try {
+       const newUser=await userService.createUser(req.body);
+       return res.status(StatusCodes.OK).json({
+        success:true,
+        message:"User created successfully",
+        data:newUser
+       }) 
+    } catch (error) {
+       next(error); 
+    }
+}
+async function getUser(req,res,next){
+    try {
+       const user=await userService.getUser(req.params.id);
+       return res.status(StatusCodes.OK).json({
+        success:true,
+        message:"User fetched successfully",
+        data:user
+       }) 
+    } catch (error) {
+        next(error);
+    }
 }
 
-function add(req,res,next){
+async function updateUser(req,res,next){
     try{
-throw new BadRequest("add","it is a bad request");
+        const updatedUser=await userService.updateUser(req.params.id,req.body);
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:"User updated successfully",
+            data:updatedUser
+        })
     }
-    catch(err){
-        next(err);
+    catch(error){
+        next(error);
     }
 }
-
 
 module.exports={
-    ping,
-    add
+    createUser,
+    getUser,
+    updateUser
 }
