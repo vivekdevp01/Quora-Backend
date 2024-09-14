@@ -18,19 +18,19 @@ async function createQuestion(req,res,next){
     }
 }
 
-async function getQuestion(req,res,next){
-    try{
-        const question=await questionService.getQuestion(req.params.id);
-        return res.status(StatusCodes.OK).json({
-            success:true,
-            message:"Question fetched successfully",
-            data:question
-        })
-    }
-    catch(error){
-        next(error);
-    }
-}
+// async function getQuestion(req,res,next){
+//     try{
+//         const question=await questionService.getQuestion(req.params.id);
+//         return res.status(StatusCodes.OK).json({
+//             success:true,
+//             message:"Question fetched successfully",
+//             data:question
+//         })
+//     }
+//     catch(error){
+//         next(error);
+//     }
+// }
 
 async function searchQuestion(req,res,next){
     try{
@@ -49,6 +49,6 @@ async function searchQuestion(req,res,next){
 
 module.exports={
     createQuestion,
-    getQuestion,
+    // getQuestion,
     searchQuestion
 }
