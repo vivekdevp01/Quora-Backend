@@ -17,19 +17,19 @@ async createQuestion(questionData){
         throw error;
     }
 }
-async getQuestion(id){
-    try{
-        const question=await Question.findById(id);
-        if(!question){
-            throw new NotFound("Question",id);
-        }
-        return question;
-    }
-    catch(error){
-        console.log(error);
-        throw error;
-    }
-}
+// async getQuestion(id){
+//     try{
+//         const question=await Question.findById(id);
+//         if(!question){
+//             throw new NotFound("Question",id);
+//         }
+//         return question;
+//     }
+//     catch(error){
+//         console.log(error);
+//         throw error;
+//     }
+// }
 async searchQuestion(text,tag){
     try {
         const query={};
